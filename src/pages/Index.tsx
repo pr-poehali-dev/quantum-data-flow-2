@@ -57,7 +57,7 @@ const Index = () => {
           {/* Logo */}
           <div className="flex items-center gap-2 px-4 py-2 bg-black/40 ring-1 ring-white/20 backdrop-blur rounded-full">
             <Dumbbell className="w-5 h-5" />
-            <span className="font-medium text-balance">Мой Спортзал</span>
+            <span className="font-medium text-balance">Onyx</span>
           </div>
 
           {/* Navigation Links */}
@@ -378,7 +378,7 @@ const Index = () => {
               <div className="lg:col-span-2">
                 <div className="flex items-center gap-2 mb-6">
                   <Dumbbell className="w-6 h-6" />
-                  <span className="text-xl font-semibold">Мой Спортзал</span>
+                  <span className="text-xl font-semibold">Onyx</span>
                 </div>
                 <p className="text-white/80 leading-relaxed text-pretty">
                   Онлайн-платформа для тренировок с профессиональными тренерами. Индивидуальные программы, питание, прогресс и сообщество — всё для вашего результата.
@@ -434,7 +434,7 @@ const Index = () => {
 
             {/* Footer Bottom */}
             <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4">
-              <p className="text-white/60 text-sm">© 2024 Мой Спортзал. Все права защищены.</p>
+              <p className="text-white/60 text-sm">© 2024 Onyx. Все права защищены.</p>
               <div className="flex items-center gap-6">
                 {["Политика конфиденциальности", "Условия использования"].map((link) => (
                   <a key={link} href="#" className="text-white/60 hover:text-white text-sm transition-colors">
