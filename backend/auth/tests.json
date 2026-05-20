@@ -1,0 +1,31 @@
+{
+  "tests": [
+    {
+      "name": "OPTIONS preflight",
+      "method": "OPTIONS",
+      "path": "/",
+      "expectedStatus": 200
+    },
+    {
+      "name": "Register new user",
+      "method": "POST",
+      "path": "/",
+      "body": {"action": "register", "email": "test_fokus2@example.com", "password": "secret123", "name": "Тест"},
+      "expectedStatus": 200
+    },
+    {
+      "name": "Login existing user",
+      "method": "POST",
+      "path": "/",
+      "body": {"action": "login", "email": "test_fokus2@example.com", "password": "secret123"},
+      "expectedStatus": 200
+    },
+    {
+      "name": "Wrong password returns 400",
+      "method": "POST",
+      "path": "/",
+      "body": {"action": "login", "email": "test_fokus2@example.com", "password": "wrongpass"},
+      "expectedStatus": 400
+    }
+  ]
+}

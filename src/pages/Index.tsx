@@ -2,6 +2,8 @@ import { Lock, Sparkles, ShieldCheck, Users, Plus, Minus, Mail, Play, Utensils, 
 import { Button } from "@/components/ui/button"
 import { useState } from "react"
 import Icon from "@/components/ui/icon"
+import AuthModal from "@/components/AuthModal"
+import { useAuth } from "@/hooks/useAuth"
 
 interface FAQ {
   question: string
@@ -67,8 +69,16 @@ const Index = () => {
     },
   ]
 
+  const { user } = useAuth()
+  const [authOpen, setAuthOpen] = useState(false)
+  const [authTab, setAuthTab] = useState<"login" | "register">("login")
+
+  const openLogin = () => { setAuthTab("login"); setAuthOpen(true) }
+  const openRegister = () => { setAuthTab("register"); setAuthOpen(true) }
+
   return (
     <div className="min-h-screen bg-[#0B0F12] text-white">
+      <AuthModal open={authOpen} onClose={() => setAuthOpen(false)} defaultTab={authTab} />
 
       {/* ─── HERO ─── */}
       <div className="relative min-h-screen">
@@ -107,10 +117,17 @@ const Index = () => {
               <span className="w-1.5 h-1.5 bg-red-400 rounded-full animate-pulse" />
               Акция −67%
             </a>
-            <a href="#contact" className="px-4 py-2 bg-black/40 ring-1 ring-white/20 backdrop-blur rounded-full hover:bg-black/60 transition-colors text-sm">
-              Войти
-            </a>
-            <Button className="bg-[#E8FF47] text-black hover:bg-[#d4eb30] rounded-full px-6 font-semibold">
+            {user ? (
+              <button onClick={() => setAuthOpen(true)} className="flex items-center gap-2 px-4 py-2 bg-black/40 ring-1 ring-white/20 backdrop-blur rounded-full hover:bg-black/60 transition-colors text-sm">
+                <Icon name="UserCheck" size={15} className="text-[#E8FF47]" />
+                {user.name || user.email.split("@")[0]}
+              </button>
+            ) : (
+              <button onClick={openLogin} className="px-4 py-2 bg-black/40 ring-1 ring-white/20 backdrop-blur rounded-full hover:bg-black/60 transition-colors text-sm">
+                Войти
+              </button>
+            )}
+            <Button onClick={openRegister} className="bg-[#E8FF47] text-black hover:bg-[#d4eb30] rounded-full px-6 font-semibold">
               Начать бесплатно
             </Button>
           </div>

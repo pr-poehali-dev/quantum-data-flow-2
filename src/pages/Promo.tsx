@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import Icon from "@/components/ui/icon"
+import AuthModal from "@/components/AuthModal"
+import { useAuth } from "@/hooks/useAuth"
 
 const DEADLINE = new Date(Date.now() + 3 * 24 * 60 * 60 * 1000)
 
@@ -77,9 +79,15 @@ const plans = [
 export default function Promo() {
   const { h, m, s } = useCountdown(DEADLINE)
   const pad = (n: number) => String(n).padStart(2, "0")
+  const { user } = useAuth()
+  const [authOpen, setAuthOpen] = useState(false)
+  const [authTab, setAuthTab] = useState<"login" | "register">("register")
+
+  const openRegister = () => { setAuthTab("register"); setAuthOpen(true) }
 
   return (
     <div className="min-h-screen bg-[#0B0F12] text-white overflow-x-hidden">
+      <AuthModal open={authOpen} onClose={() => setAuthOpen(false)} defaultTab={authTab} />
 
       {/* ── HEADER ── */}
       <header className="flex items-center justify-between px-6 py-5 border-b border-white/10">
@@ -87,10 +95,22 @@ export default function Promo() {
           <Icon name="Dumbbell" size={22} className="text-[#E8FF47]" />
           <span className="font-bold text-lg tracking-tight">Мой Спортзал</span>
         </a>
-        <a href="/" className="text-white/50 hover:text-white transition-colors text-sm flex items-center gap-1">
-          <Icon name="ArrowLeft" size={16} />
-          На главную
-        </a>
+        <div className="flex items-center gap-3">
+          {user ? (
+            <button onClick={() => setAuthOpen(true)} className="flex items-center gap-2 px-4 py-2 bg-white/10 ring-1 ring-white/20 rounded-full text-sm hover:bg-white/15 transition-colors">
+              <Icon name="UserCheck" size={15} className="text-[#E8FF47]" />
+              {user.name || user.email.split("@")[0]}
+            </button>
+          ) : (
+            <button onClick={() => { setAuthTab("login"); setAuthOpen(true) }} className="text-white/50 hover:text-white transition-colors text-sm">
+              Войти
+            </button>
+          )}
+          <a href="/" className="text-white/50 hover:text-white transition-colors text-sm flex items-center gap-1">
+            <Icon name="ArrowLeft" size={16} />
+            На главную
+          </a>
+        </div>
       </header>
 
       {/* ── HERO АКЦИЯ ── */}
@@ -135,7 +155,7 @@ export default function Promo() {
           </div>
 
           <div className="flex justify-center">
-            <Button size="lg"
+            <Button size="lg" onClick={openRegister}
               className="bg-[#E8FF47] text-black hover:bg-[#d4eb30] rounded-full px-10 py-6 text-xl font-black uppercase tracking-wide shadow-[0_0_60px_rgba(232,255,71,0.4)]">
               Забрать скидку прямо сейчас
             </Button>
@@ -237,7 +257,7 @@ export default function Promo() {
                   </ul>
 
                   {/* CTA */}
-                  <Button
+                  <Button onClick={openRegister}
                     className={`w-full rounded-full font-black uppercase tracking-wide py-5 text-sm ${plan.accent
                       ? "bg-black text-[#E8FF47] hover:bg-black/80"
                       : "bg-[#E8FF47] text-black hover:bg-[#d4eb30]"}`}>
@@ -265,7 +285,7 @@ export default function Promo() {
             Если за 30 дней ты не заметишь прогресса — вернём деньги полностью. Без вопросов, без штрафов, без нервов. Мы так уверены в результате.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <Button size="lg"
+            <Button size="lg" onClick={openRegister}
               className="bg-[#E8FF47] text-black hover:bg-[#d4eb30] rounded-full px-10 font-black uppercase tracking-wide shadow-[0_0_40px_rgba(232,255,71,0.3)]">
               Начать без риска
             </Button>
