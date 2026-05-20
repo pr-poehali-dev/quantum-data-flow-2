@@ -215,6 +215,105 @@ const Index = () => {
         </div>
       </section>
 
+      {/* ─── ABOUT ─── */}
+      <section id="about" className="relative z-10 py-24 px-6">
+        <div className="max-w-7xl mx-auto">
+
+          {/* Top: История */}
+          <div className="rounded-3xl bg-white/5 ring-1 ring-white/10 backdrop-blur overflow-hidden mb-6">
+            <div className="grid grid-cols-1 lg:grid-cols-2">
+              {/* Left */}
+              <div className="p-12 lg:p-16 flex flex-col justify-center">
+                <div className="inline-flex px-3 py-1 bg-white/10 ring-1 ring-white/20 rounded-full mb-6 w-fit">
+                  <span className="text-xs font-medium tracking-widest uppercase text-white/70">О нас</span>
+                </div>
+                <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-6 leading-tight">
+                  Как всё<br />началось
+                </h2>
+                <p className="text-white/70 leading-relaxed text-lg mb-5">
+                  В 2020 году обычный московский спортзал закрылся на карантин. Тренер Антон Веселов остался один на один с 40 постоянными клиентами — все они хотели продолжать заниматься, но не знали как.
+                </p>
+                <p className="text-white/70 leading-relaxed text-lg mb-5">
+                  Антон начал записывать тренировки на телефон и отправлять их в чат. Результаты удивили всех: люди не только не потеряли форму — многие добились лучших результатов, чем в зале, потому что наконец-то занялись системно.
+                </p>
+                <p className="text-white/70 leading-relaxed text-lg">
+                  Так родилась идея: создать платформу, где каждый получает внимание личного тренера — без привязки к конкретному залу и расписанию.
+                </p>
+              </div>
+
+              {/* Right — quote block */}
+              <div className="p-12 lg:p-16 border-t lg:border-t-0 lg:border-l border-white/10 flex flex-col justify-center bg-[#E8FF47]/5">
+                <Icon name="Quote" size={40} className="text-[#E8FF47]/40 mb-8" />
+                <blockquote className="text-2xl md:text-3xl font-light leading-relaxed text-white/90 mb-8 italic">
+                  «Я понял: проблема не в том, что у людей нет зала. Проблема в том, что у них нет системы.»
+                </blockquote>
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 rounded-full bg-white/10 ring-2 ring-[#E8FF47]/30 flex items-center justify-center flex-shrink-0">
+                    <Icon name="User" size={24} className="text-white/50" />
+                  </div>
+                  <div>
+                    <div className="font-semibold">Антон Веселов</div>
+                    <div className="text-white/50 text-sm">Основатель «Мой Спортзал», тренер с 14-летним опытом</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Middle: Почему Фокус */}
+          <div className="rounded-3xl bg-[#E8FF47]/8 ring-1 ring-[#E8FF47]/20 backdrop-blur p-12 md:p-16 mb-6">
+            <div className="max-w-3xl mx-auto text-center">
+              <div className="inline-flex px-3 py-1 bg-[#E8FF47]/10 ring-1 ring-[#E8FF47]/30 rounded-full mb-6">
+                <span className="text-xs font-medium tracking-widest uppercase text-[#E8FF47]/80">Наш принцип</span>
+              </div>
+              <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-6">
+                Почему <span className="text-[#E8FF47]">Фокус</span>?
+              </h2>
+              <p className="text-white/70 leading-relaxed text-lg mb-6">
+                Название появилось не случайно. Мы заметили, что большинство людей бросают тренировки не из-за лени — они просто распыляются: разные залы, случайные упражнения, советы из интернета без системы.
+              </p>
+              <p className="text-white/70 leading-relaxed text-lg mb-10">
+                <strong className="text-white">Фокус</strong> — это концентрация на одном: на твоём конкретном результате. Один тренер, одна программа, один понятный путь. Никаких лишних движений — только то, что работает именно для тебя.
+              </p>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                {[
+                  { icon: "Target", title: "Одна цель", desc: "Тренер фокусируется на вашей задаче — не распыляется на шаблонные программы" },
+                  { icon: "Route", title: "Чёткий путь", desc: "Понятный план на каждый день без лишних вопросов «что делать сегодня?»" },
+                  { icon: "Flame", title: "Живой результат", desc: "Прогресс, который виден — в цифрах, замерах и самочувствии" },
+                ].map((item) => (
+                  <div key={item.title} className="rounded-2xl bg-white/5 ring-1 ring-white/10 p-6 text-center">
+                    <div className="w-12 h-12 rounded-xl bg-[#E8FF47]/10 ring-1 ring-[#E8FF47]/20 flex items-center justify-center mx-auto mb-4">
+                      <Icon name={item.icon} size={22} className="text-[#E8FF47]" />
+                    </div>
+                    <h4 className="font-semibold mb-2">{item.title}</h4>
+                    <p className="text-white/60 text-sm leading-relaxed">{item.desc}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Bottom: Цифры */}
+          <div className="rounded-3xl bg-white/5 ring-1 ring-white/10 backdrop-blur p-12 md:p-16">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+              {[
+                { value: "2020", label: "год основания" },
+                { value: "15 000+", label: "активных участников" },
+                { value: "120+", label: "тренеров на платформе" },
+                { value: "94%", label: "достигают своей цели" },
+              ].map((stat) => (
+                <div key={stat.label}>
+                  <div className="text-3xl md:text-4xl font-bold text-[#E8FF47] mb-2">{stat.value}</div>
+                  <div className="text-white/50 text-sm">{stat.label}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+        </div>
+      </section>
+
       {/* ─── TRAINERS ─── */}
       <section id="trainers" className="relative z-10 py-24 px-6">
         <div className="max-w-7xl mx-auto">
