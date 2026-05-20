@@ -56,8 +56,8 @@ const Index = () => {
         <nav className="relative z-10 flex items-center justify-between p-6">
           {/* Logo */}
           <div className="flex items-center gap-2 px-4 py-2 bg-black/40 ring-1 ring-white/20 backdrop-blur rounded-full">
-            <Dumbbell className="w-5 h-5" />
-            <span className="font-medium text-balance">Onyx</span>
+            <Icon name="Target" size={20} />
+            <span className="font-medium text-balance">Фокус</span>
           </div>
 
           {/* Navigation Links */}
@@ -160,6 +160,87 @@ const Index = () => {
               </div>
               <h3 className="text-xl font-semibold mb-4">Живое сообщество</h3>
               <p className="text-white/80 leading-relaxed">Форум, поддержка и мотивация от участников и тренеров.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* About Section */}
+      <section className="relative z-10 py-24 px-6" id="about">
+        <div className="max-w-7xl mx-auto">
+          <div className="rounded-3xl bg-white/5 ring-1 ring-white/10 backdrop-blur overflow-hidden">
+            <div className="grid grid-cols-1 lg:grid-cols-2">
+              {/* Left — story */}
+              <div className="p-12 lg:p-16 flex flex-col justify-center">
+                <div className="mb-4 px-3 py-1 bg-white/10 ring-1 ring-white/20 rounded-full inline-flex w-fit">
+                  <span className="text-xs font-medium tracking-widest uppercase text-white/70">О нас</span>
+                </div>
+                <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-6 text-balance">
+                  Фокус — это не просто теннис.<br />Это система.
+                </h2>
+                <p className="text-white/70 leading-relaxed mb-6 text-lg">
+                  Всё началось в 2019 году на одном московском корте, когда тренер с 15-летним опытом заметил главную проблему: игроки теряют прогресс не из-за недостатка таланта, а из-за отсутствия системы — правильного снаряжения, структурированных тренировок и осознанного подхода.
+                </p>
+                <p className="text-white/70 leading-relaxed mb-10 text-lg">
+                  Так появился «Фокус» — клуб, где каждая деталь продумана: от выбора ракетки под стиль игры до персональных планов, которые реально работают. Сегодня нас выбирают более 800 игроков по всей стране.
+                </p>
+
+                {/* Stats row */}
+                <div className="grid grid-cols-3 gap-6">
+                  {[
+                    { value: "800+", label: "игроков" },
+                    { value: "15", label: "лет опыта" },
+                    { value: "6", label: "тренеров" },
+                  ].map((stat) => (
+                    <div key={stat.label} className="text-center p-4 rounded-2xl bg-white/5 ring-1 ring-white/10">
+                      <div className="text-3xl font-bold mb-1">{stat.value}</div>
+                      <div className="text-white/60 text-sm">{stat.label}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Right — equipment */}
+              <div className="p-12 lg:p-16 border-t lg:border-t-0 lg:border-l border-white/10 flex flex-col justify-center">
+                <h3 className="text-2xl font-semibold mb-8">Наше снаряжение</h3>
+                <div className="flex flex-col gap-5">
+                  {[
+                    {
+                      icon: "Crosshair",
+                      title: "Подбор ракетки",
+                      desc: "Анализируем ваш стиль игры и подбираем ракетку под баланс, вес и натяжение струн.",
+                    },
+                    {
+                      icon: "Zap",
+                      title: "Умные мячемёты",
+                      desc: "Машина с 12 режимами подачи — отрабатывайте удары без партнёра в любое время.",
+                    },
+                    {
+                      icon: "Activity",
+                      title: "Датчики движения",
+                      desc: "Трекеры на ракетке фиксируют скорость, вращение и точку удара — данные идут прямо в приложение.",
+                    },
+                    {
+                      icon: "Video",
+                      title: "Видеоанализ",
+                      desc: "Камеры на кортах пишут тренировку. Тренер разбирает технику покадрово.",
+                    },
+                  ].map((item) => (
+                    <div
+                      key={item.title}
+                      className="flex items-start gap-4 p-5 rounded-2xl bg-white/5 ring-1 ring-white/10 hover:bg-white/10 transition-colors"
+                    >
+                      <div className="flex-shrink-0 w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center">
+                        <Icon name={item.icon} size={20} />
+                      </div>
+                      <div>
+                        <div className="font-semibold mb-1">{item.title}</div>
+                        <div className="text-white/60 text-sm leading-relaxed">{item.desc}</div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
         </div>
