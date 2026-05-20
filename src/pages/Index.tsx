@@ -102,6 +102,11 @@ const Index = () => {
           </div>
 
           <div className="flex items-center gap-3">
+            <a href="/promo"
+              className="flex items-center gap-1.5 px-4 py-2 bg-red-500/20 ring-1 ring-red-500/50 backdrop-blur rounded-full hover:bg-red-500/30 transition-colors text-sm text-red-300 font-semibold">
+              <span className="w-1.5 h-1.5 bg-red-400 rounded-full animate-pulse" />
+              Акция −67%
+            </a>
             <a href="#contact" className="px-4 py-2 bg-black/40 ring-1 ring-white/20 backdrop-blur rounded-full hover:bg-black/60 transition-colors text-sm">
               Войти
             </a>
