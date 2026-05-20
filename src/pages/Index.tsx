@@ -1,4 +1,4 @@
-import { Dumbbell, Lock, Sparkles, ShieldCheck, Utensils, Users, Plus, Minus, Mail } from "lucide-react"
+import { Lock, Sparkles, ShieldCheck, Users, Plus, Minus, Mail, Play, Utensils, MessageCircle, TrendingUp, Video, Apple, BarChart2, BookOpen } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useState } from "react"
 import Icon from "@/components/ui/icon"
@@ -7,6 +7,30 @@ interface FAQ {
   question: string
   answer: string
 }
+
+const trainers = [
+  {
+    name: "Алексей Громов",
+    spec: "Силовые тренировки",
+    exp: "12 лет",
+    img: "https://api.dicebear.com/7.x/personas/svg?seed=aleksey&backgroundColor=1a1a2e",
+    tags: ["Силовой", "Функциональный"],
+  },
+  {
+    name: "Мария Соколова",
+    spec: "Йога и растяжка",
+    exp: "8 лет",
+    img: "https://api.dicebear.com/7.x/personas/svg?seed=maria&backgroundColor=1a1a2e",
+    tags: ["Йога", "Пилатес"],
+  },
+  {
+    name: "Дмитрий Лебедев",
+    spec: "Кардио и HIIT",
+    exp: "10 лет",
+    img: "https://api.dicebear.com/7.x/personas/svg?seed=dmitry&backgroundColor=1a1a2e",
+    tags: ["HIIT", "Бег"],
+  },
+]
 
 const Index = () => {
   const [openFaq, setOpenFaq] = useState<number | null>(null)
@@ -19,219 +43,344 @@ const Index = () => {
     {
       question: "Нужна ли физическая подготовка для начала?",
       answer:
-        "Нет! Наша платформа подходит для любого уровня — от полных новичков до опытных спортсменов. При регистрации вы заполните анкету, и тренер подберёт программу именно под ваш уровень и цели.",
+        "Нет! Платформа подходит для любого уровня — от полных новичков до опытных спортсменов. При регистрации заполните анкету, и тренер подберёт программу именно под вас.",
     },
     {
       question: "Как проходят онлайн-тренировки?",
       answer:
-        "Тренировки доступны в формате видеоуроков — смотрите в удобное время или занимайтесь в прямом эфире вместе с тренером. Вы можете задавать вопросы в чате, получать обратную связь по технике и общаться с другими участниками.",
+        "Тренировки доступны в формате видеоуроков — смотрите в удобное время или занимайтесь в прямом эфире. Задавайте вопросы в чате, получайте обратную связь по технике.",
     },
     {
       question: "Что входит в программу питания?",
       answer:
-        "Персональный план питания составляется с учётом ваших целей, предпочтений и образа жизни. Вы получаете меню на неделю, список продуктов, рецепты и рекомендации по добавкам. Диетолог доступен для вопросов в любое время.",
+        "Персональный план питания составляется с учётом ваших целей и предпочтений. Меню на неделю, список продуктов, рецепты и рекомендации по добавкам. Диетолог на связи.",
     },
     {
       question: "Как работает отслеживание прогресса?",
       answer:
-        "В личном кабинете вы фиксируете результаты тренировок, замеры тела и самочувствие. Система строит графики динамики, а тренер видит ваш прогресс и корректирует программу при необходимости.",
+        "В личном кабинете фиксируйте результаты тренировок, замеры и самочувствие. Система строит графики, тренер видит прогресс и корректирует программу при необходимости.",
+    },
+    {
+      question: "Можно ли заниматься без оборудования?",
+      answer:
+        "Да! У нас есть программы как для спортзала, так и для тренировок дома без инвентаря. Тренер адаптирует план под ваши условия.",
     },
   ]
 
   return (
     <div className="min-h-screen bg-[#0B0F12] text-white">
-      {/* Hero Section */}
+
+      {/* ─── HERO ─── */}
       <div className="relative min-h-screen">
-        {/* Background Image with Overlay */}
         <div
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{
-            backgroundImage: "url(https://cdn.poehali.dev/files/10574540-768f-4d24-9377-570162281bd9.jpg)",
-          }}
+          style={{ backgroundImage: "url(https://cdn.poehali.dev/files/10574540-768f-4d24-9377-570162281bd9.jpg)" }}
         >
-          <div className="absolute inset-0 bg-gradient-to-b from-black/50 to-black/85" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/50 to-black/90" />
         </div>
 
-        {/* Navigation */}
+        {/* Nav */}
         <nav className="relative z-10 flex items-center justify-between p-6">
-          {/* Logo */}
           <div className="flex items-center gap-2 px-4 py-2 bg-black/40 ring-1 ring-white/20 backdrop-blur rounded-full">
-            <Icon name="Target" size={20} />
-            <span className="font-medium text-balance">Фокус</span>
+            <Icon name="Dumbbell" size={20} />
+            <span className="font-bold tracking-tight">Мой Спортзал</span>
           </div>
 
-          {/* Navigation Links */}
           <div className="hidden md:flex items-center gap-1">
-            {["Тренировки", "Тренеры", "Программы", "Вопросы", "Контакты"].map((item) => (
-              <a
-                key={item}
-                href="#"
-                className="px-4 py-2 bg-black/40 ring-1 ring-white/20 backdrop-blur rounded-full hover:bg-black/50 transition-colors"
-              >
-                {item}
+            {[
+              { label: "Тренировки", href: "#features" },
+              { label: "Тренеры", href: "#trainers" },
+              { label: "Программы", href: "#journey" },
+              { label: "Вопросы", href: "#faq" },
+              { label: "Контакты", href: "#contact" },
+            ].map((item) => (
+              <a key={item.label} href={item.href}
+                className="px-4 py-2 bg-black/40 ring-1 ring-white/20 backdrop-blur rounded-full hover:bg-black/60 transition-colors text-sm">
+                {item.label}
               </a>
             ))}
           </div>
 
-          {/* Action Buttons */}
           <div className="flex items-center gap-3">
-            <a
-              href="#contact"
-              className="px-4 py-2 bg-black/40 ring-1 ring-white/20 backdrop-blur rounded-full hover:bg-black/50 transition-colors"
-            >
+            <a href="#contact" className="px-4 py-2 bg-black/40 ring-1 ring-white/20 backdrop-blur rounded-full hover:bg-black/60 transition-colors text-sm">
               Войти
             </a>
-            <Button className="bg-white text-black hover:bg-white/90 rounded-full px-6">Начать бесплатно</Button>
+            <Button className="bg-[#E8FF47] text-black hover:bg-[#d4eb30] rounded-full px-6 font-semibold">
+              Начать бесплатно
+            </Button>
           </div>
         </nav>
 
         {/* Hero Content */}
         <div className="relative z-10 flex flex-col items-center justify-center min-h-[calc(100vh-120px)] px-6 text-center">
-          {/* Badge */}
           <div className="mb-6 px-4 py-2 bg-black/40 ring-1 ring-white/20 backdrop-blur rounded-full">
-            <span className="text-sm font-medium">Онлайн-тренировки с профессиональными тренерами</span>
+            <span className="text-sm font-medium">Онлайн-платформа для тренировок и общения с тренерами</span>
           </div>
 
-          {/* Main Headline */}
-          <h1 className="text-6xl md:text-8xl font-light tracking-tight mb-6 text-balance">Твой спортзал — везде.</h1>
+          <h1 className="text-5xl md:text-8xl font-bold tracking-tight mb-6 text-balance leading-tight">
+            Мой Спортзал —<br />
+            <span className="text-[#E8FF47]">везде и всегда.</span>
+          </h1>
 
-          {/* Subheading */}
-          <p className="text-xl md:text-2xl text-white/90 max-w-4xl mb-12 leading-relaxed text-pretty">
-            Индивидуальные программы тренировок и питания, видеоуроки с тренерами, отслеживание прогресса и живое сообщество — всё в одном месте.
+          <p className="text-xl md:text-2xl text-white/80 max-w-3xl mb-12 leading-relaxed">
+            Индивидуальные программы тренировок и питания, видеоуроки с тренерами, трекер прогресса и живое сообщество — всё в одном месте.
           </p>
 
-          {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 mb-16">
-            <Button size="lg" className="bg-white text-black hover:bg-white/90 rounded-full px-8 py-4 text-lg">
+            <Button size="lg" className="bg-[#E8FF47] text-black hover:bg-[#d4eb30] rounded-full px-8 py-4 text-lg font-semibold">
               Начать тренироваться
             </Button>
-            <Button
-              size="lg"
-              variant="outline"
-              className="bg-black/40 ring-1 ring-white/20 backdrop-blur border-0 text-white hover:bg-black/50 rounded-full px-8 py-4 text-lg"
-            >
+            <Button size="lg" variant="outline"
+              className="bg-black/40 ring-1 ring-white/30 backdrop-blur border-0 text-white hover:bg-black/60 rounded-full px-8 py-4 text-lg">
               Смотреть программы
             </Button>
           </div>
 
-          {/* Footer Note */}
           <div className="flex items-center gap-2 px-4 py-2 bg-black/40 ring-1 ring-white/20 backdrop-blur rounded-full">
-            <Lock className="w-4 h-4" />
+            <Lock className="w-4 h-4 text-[#E8FF47]" />
             <span className="text-sm font-medium">7 дней бесплатно — без привязки карты</span>
+          </div>
+
+          {/* Stats */}
+          <div className="flex gap-8 mt-16">
+            {[
+              { value: "15 000+", label: "участников" },
+              { value: "120+", label: "тренеров" },
+              { value: "500+", label: "программ" },
+            ].map((s) => (
+              <div key={s.label} className="text-center">
+                <div className="text-2xl md:text-3xl font-bold text-[#E8FF47]">{s.value}</div>
+                <div className="text-white/60 text-sm mt-1">{s.label}</div>
+              </div>
+            ))}
           </div>
         </div>
       </div>
 
-      {/* Features Section */}
-      <section className="relative z-10 py-24 px-6">
+      {/* ─── FEATURES ─── */}
+      <section id="features" className="relative z-10 py-24 px-6">
         <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8">
-            {/* Video Workouts */}
-            <div className="rounded-2xl bg-black/20 ring-1 ring-white/15 backdrop-blur p-8 text-center">
-              <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-black/30 ring-1 ring-white/20 mb-6">
-                <Icon name="Play" size={24} />
+          <div className="text-center mb-16">
+            <div className="inline-flex px-3 py-1 bg-white/10 ring-1 ring-white/20 rounded-full mb-4">
+              <span className="text-xs font-medium tracking-widest uppercase text-white/70">Возможности</span>
+            </div>
+            <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">Всё для твоего результата</h2>
+            <p className="text-white/60 text-lg max-w-2xl mx-auto">Платформа, которая заменяет личного тренера, диетолога и спортзал одновременно</p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+            {[
+              {
+                icon: "Video",
+                title: "Видеоуроки",
+                desc: "Сотни тренировок от профессионалов на любой уровень. Смотрите в удобное время или занимайтесь в прямом эфире.",
+                accent: true,
+              },
+              {
+                icon: "Sparkles",
+                title: "Индивидуальный план",
+                desc: "Тренер составляет программу тренировок и питания лично под вас — с учётом целей, уровня и расписания.",
+              },
+              {
+                icon: "TrendingUp",
+                title: "Трекер прогресса",
+                desc: "Фиксируйте результаты, замеры и достижения. Наглядные графики покажут как далеко вы продвинулись.",
+              },
+              {
+                icon: "MessageCircle",
+                title: "Форум сообщества",
+                desc: "Общайтесь с другими участниками, делитесь успехами, находите партнёров по тренировкам.",
+              },
+              {
+                icon: "Apple",
+                title: "Программы питания",
+                desc: "Персональное меню на неделю, список продуктов и рецепты. Диетолог отвечает на вопросы в любое время.",
+              },
+              {
+                icon: "Users",
+                title: "Консультации с тренером",
+                desc: "Чат напрямую с вашим тренером. Разбор техники, корректировка плана и поддержка на каждом шагу.",
+              },
+            ].map((f) => (
+              <div key={f.title}
+                className={`rounded-2xl p-8 ring-1 backdrop-blur flex flex-col gap-4 ${f.accent ? "bg-[#E8FF47]/10 ring-[#E8FF47]/30" : "bg-white/5 ring-white/10 hover:bg-white/8 transition-colors"}`}>
+                <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${f.accent ? "bg-[#E8FF47]/20" : "bg-white/10"}`}>
+                  <Icon name={f.icon} size={24} className={f.accent ? "text-[#E8FF47]" : ""} />
+                </div>
+                <h3 className="text-xl font-semibold">{f.title}</h3>
+                <p className="text-white/60 leading-relaxed">{f.desc}</p>
               </div>
-              <h3 className="text-xl font-semibold mb-4">Видеоуроки</h3>
-              <p className="text-white/80 leading-relaxed">Тренировки с профессиональными тренерами в удобное время.</p>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ─── TRAINERS ─── */}
+      <section id="trainers" className="relative z-10 py-24 px-6">
+        <div className="max-w-7xl mx-auto">
+          <div className="rounded-3xl bg-white/5 ring-1 ring-white/10 backdrop-blur p-12 md:p-16">
+            <div className="text-center mb-16">
+              <div className="inline-flex px-3 py-1 bg-white/10 ring-1 ring-white/20 rounded-full mb-4">
+                <span className="text-xs font-medium tracking-widest uppercase text-white/70">Тренеры</span>
+              </div>
+              <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">Профессионалы на вашей стороне</h2>
+              <p className="text-white/60 text-lg max-w-xl mx-auto">Более 120 сертифицированных тренеров готовы составить программу под ваши цели</p>
             </div>
 
-            {/* Personal Programs */}
-            <div className="rounded-2xl bg-black/20 ring-1 ring-white/15 backdrop-blur p-8 text-center">
-              <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-black/30 ring-1 ring-white/20 mb-6">
-                <Sparkles className="w-6 h-6" />
-              </div>
-              <h3 className="text-xl font-semibold mb-4">Индивидуальный план</h3>
-              <p className="text-white/80 leading-relaxed">Программы тренировок и питания под ваши цели и возможности.</p>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+              {trainers.map((t) => (
+                <div key={t.name} className="rounded-2xl bg-white/5 ring-1 ring-white/10 p-8 flex flex-col items-center text-center hover:bg-white/10 transition-colors">
+                  <div className="w-20 h-20 rounded-full bg-white/10 ring-2 ring-white/20 mb-5 overflow-hidden flex items-center justify-center">
+                    <Icon name="User" size={40} className="text-white/40" />
+                  </div>
+                  <h3 className="text-lg font-semibold mb-1">{t.name}</h3>
+                  <p className="text-white/60 text-sm mb-1">{t.spec}</p>
+                  <p className="text-[#E8FF47] text-sm font-medium mb-4">Опыт {t.exp}</p>
+                  <div className="flex flex-wrap gap-2 justify-center mb-6">
+                    {t.tags.map((tag) => (
+                      <span key={tag} className="px-3 py-1 bg-white/10 ring-1 ring-white/20 rounded-full text-xs">{tag}</span>
+                    ))}
+                  </div>
+                  <Button variant="outline" size="sm"
+                    className="bg-transparent ring-1 ring-white/20 border-0 text-white hover:bg-white/10 rounded-full w-full">
+                    Написать тренеру
+                  </Button>
+                </div>
+              ))}
             </div>
 
-            {/* Progress Tracking */}
-            <div className="rounded-2xl bg-black/20 ring-1 ring-white/15 backdrop-blur p-8 text-center">
-              <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-black/30 ring-1 ring-white/20 mb-6">
-                <ShieldCheck className="w-6 h-6" />
-              </div>
-              <h3 className="text-xl font-semibold mb-4">Трекер прогресса</h3>
-              <p className="text-white/80 leading-relaxed">Следите за результатами — графики, замеры, достижения.</p>
-            </div>
-
-            {/* Community */}
-            <div className="rounded-2xl bg-black/20 ring-1 ring-white/15 backdrop-blur p-8 text-center">
-              <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-black/30 ring-1 ring-white/20 mb-6">
-                <Users className="w-6 h-6" />
-              </div>
-              <h3 className="text-xl font-semibold mb-4">Живое сообщество</h3>
-              <p className="text-white/80 leading-relaxed">Форум, поддержка и мотивация от участников и тренеров.</p>
+            <div className="text-center">
+              <Button className="bg-[#E8FF47] text-black hover:bg-[#d4eb30] rounded-full px-8 font-semibold">
+                Смотреть всех тренеров
+              </Button>
             </div>
           </div>
         </div>
       </section>
 
-      {/* About Section */}
-      <section className="relative z-10 py-24 px-6" id="about">
+      {/* ─── JOURNEY ─── */}
+      <section id="journey" className="relative z-10 py-24 px-6">
+        <div className="max-w-7xl mx-auto">
+          <div className="rounded-3xl bg-white/5 ring-1 ring-white/10 backdrop-blur p-12 md:p-16">
+            <div className="text-center mb-16">
+              <div className="inline-flex px-3 py-1 bg-white/10 ring-1 ring-white/20 rounded-full mb-4">
+                <span className="text-xs font-medium tracking-widest uppercase text-white/70">Как это работает</span>
+              </div>
+              <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">Ваш путь к результату</h2>
+              <p className="text-white/60 text-lg max-w-xl mx-auto">Четыре шага — и вы уже тренируетесь с профессионалами</p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {[
+                { step: "01", icon: "ClipboardList", title: "Регистрация", desc: "Заполните анкету: цели, уровень подготовки, доступное время и оборудование." },
+                { step: "02", icon: "UserCheck", title: "Ваш тренер", desc: "Алгоритм подберёт подходящего тренера. Он изучит анкету и свяжется с вами." },
+                { step: "03", icon: "Dumbbell", title: "Тренировки", desc: "Занимайтесь по персональному плану: видеоуроки, прямые эфиры, чат с тренером." },
+                { step: "04", icon: "Trophy", title: "Результат", desc: "Фиксируйте прогресс, корректируйте план и достигайте поставленных целей." },
+              ].map((phase) => (
+                <div key={phase.step} className="rounded-2xl bg-white/5 ring-1 ring-white/10 p-8 flex flex-col">
+                  <div className="text-[#E8FF47] text-4xl font-bold mb-6 opacity-60">{phase.step}</div>
+                  <div className="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center mb-5">
+                    <Icon name={phase.icon} size={24} />
+                  </div>
+                  <h3 className="text-xl font-semibold mb-3">{phase.title}</h3>
+                  <p className="text-white/60 leading-relaxed flex-1">{phase.desc}</p>
+                </div>
+              ))}
+            </div>
+
+            <div className="mt-12 text-center">
+              <Button size="lg" className="bg-[#E8FF47] text-black hover:bg-[#d4eb30] rounded-full px-10 font-semibold text-lg">
+                Начать прямо сейчас
+              </Button>
+              <p className="text-white/40 text-sm mt-4">7 дней бесплатно — карта не нужна</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ─── FAQ ─── */}
+      <section id="faq" className="relative z-10 py-24 px-6">
+        <div className="max-w-3xl mx-auto">
+          <div className="text-center mb-16">
+            <div className="inline-flex px-3 py-1 bg-white/10 ring-1 ring-white/20 rounded-full mb-4">
+              <span className="text-xs font-medium tracking-widest uppercase text-white/70">Вопросы</span>
+            </div>
+            <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">Часто спрашивают</h2>
+          </div>
+
+          <div className="flex flex-col gap-3">
+            {faqs.map((faq, index) => (
+              <div key={index}
+                className="rounded-2xl bg-white/5 ring-1 ring-white/10 overflow-hidden">
+                <button
+                  onClick={() => toggleFaq(index)}
+                  className="w-full flex items-center justify-between p-6 text-left hover:bg-white/5 transition-colors"
+                >
+                  <span className="font-medium text-lg pr-4">{faq.question}</span>
+                  {openFaq === index
+                    ? <Minus className="w-5 h-5 flex-shrink-0 text-[#E8FF47]" />
+                    : <Plus className="w-5 h-5 flex-shrink-0 text-white/60" />}
+                </button>
+                {openFaq === index && (
+                  <div className="px-6 pb-6 text-white/60 leading-relaxed border-t border-white/10 pt-4">
+                    {faq.answer}
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ─── CONTACT ─── */}
+      <section id="contact" className="relative z-10 py-24 px-6">
         <div className="max-w-7xl mx-auto">
           <div className="rounded-3xl bg-white/5 ring-1 ring-white/10 backdrop-blur overflow-hidden">
             <div className="grid grid-cols-1 lg:grid-cols-2">
-              {/* Left — story */}
-              <div className="p-12 lg:p-16 flex flex-col justify-center">
-                <div className="mb-4 px-3 py-1 bg-white/10 ring-1 ring-white/20 rounded-full inline-flex w-fit">
-                  <span className="text-xs font-medium tracking-widest uppercase text-white/70">О нас</span>
+              {/* Form */}
+              <div className="p-12 lg:p-16">
+                <div className="inline-flex px-3 py-1 bg-white/10 ring-1 ring-white/20 rounded-full mb-6">
+                  <span className="text-xs font-medium tracking-widest uppercase text-white/70">Контакты</span>
                 </div>
-                <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-6 text-balance">
-                  Фокус — это не просто теннис.<br />Это система.
-                </h2>
-                <p className="text-white/70 leading-relaxed mb-6 text-lg">
-                  Всё началось в 2019 году на одном московском корте, когда тренер с 15-летним опытом заметил главную проблему: игроки теряют прогресс не из-за недостатка таланта, а из-за отсутствия системы — правильного снаряжения, структурированных тренировок и осознанного подхода.
-                </p>
-                <p className="text-white/70 leading-relaxed mb-10 text-lg">
-                  Так появился «Фокус» — клуб, где каждая деталь продумана: от выбора ракетки под стиль игры до персональных планов, которые реально работают. Сегодня нас выбирают более 800 игроков по всей стране.
-                </p>
+                <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">Остались вопросы?</h2>
+                <p className="text-white/60 mb-10">Напишите нам — ответим в течение нескольких часов и поможем выбрать подходящую программу.</p>
 
-                {/* Stats row */}
-                <div className="grid grid-cols-3 gap-6">
-                  {[
-                    { value: "800+", label: "игроков" },
-                    { value: "15", label: "лет опыта" },
-                    { value: "6", label: "тренеров" },
-                  ].map((stat) => (
-                    <div key={stat.label} className="text-center p-4 rounded-2xl bg-white/5 ring-1 ring-white/10">
-                      <div className="text-3xl font-bold mb-1">{stat.value}</div>
-                      <div className="text-white/60 text-sm">{stat.label}</div>
-                    </div>
-                  ))}
-                </div>
+                <form className="flex flex-col gap-4">
+                  <input
+                    type="text"
+                    placeholder="Ваше имя"
+                    className="w-full bg-white/5 ring-1 ring-white/15 rounded-2xl px-5 py-4 text-white placeholder-white/40 focus:outline-none focus:ring-white/30 transition-all"
+                  />
+                  <input
+                    type="email"
+                    placeholder="Email"
+                    className="w-full bg-white/5 ring-1 ring-white/15 rounded-2xl px-5 py-4 text-white placeholder-white/40 focus:outline-none focus:ring-white/30 transition-all"
+                  />
+                  <textarea
+                    rows={4}
+                    placeholder="Ваш вопрос или цель (например: похудеть, набрать массу, улучшить выносливость...)"
+                    className="w-full bg-white/5 ring-1 ring-white/15 rounded-2xl px-5 py-4 text-white placeholder-white/40 focus:outline-none focus:ring-white/30 transition-all resize-none"
+                  />
+                  <Button size="lg" className="bg-[#E8FF47] text-black hover:bg-[#d4eb30] rounded-full font-semibold mt-2">
+                    <Mail className="w-4 h-4 mr-2" />
+                    Отправить сообщение
+                  </Button>
+                </form>
               </div>
 
-              {/* Right — equipment */}
+              {/* Info */}
               <div className="p-12 lg:p-16 border-t lg:border-t-0 lg:border-l border-white/10 flex flex-col justify-center">
-                <h3 className="text-2xl font-semibold mb-8">Наше снаряжение</h3>
+                <h3 className="text-2xl font-semibold mb-8">Почему выбирают нас</h3>
                 <div className="flex flex-col gap-5">
                   {[
-                    {
-                      icon: "Crosshair",
-                      title: "Подбор ракетки",
-                      desc: "Анализируем ваш стиль игры и подбираем ракетку под баланс, вес и натяжение струн.",
-                    },
-                    {
-                      icon: "Zap",
-                      title: "Умные мячемёты",
-                      desc: "Машина с 12 режимами подачи — отрабатывайте удары без партнёра в любое время.",
-                    },
-                    {
-                      icon: "Activity",
-                      title: "Датчики движения",
-                      desc: "Трекеры на ракетке фиксируют скорость, вращение и точку удара — данные идут прямо в приложение.",
-                    },
-                    {
-                      icon: "Video",
-                      title: "Видеоанализ",
-                      desc: "Камеры на кортах пишут тренировку. Тренер разбирает технику покадрово.",
-                    },
+                    { icon: "Clock", title: "Тренировки в любое время", desc: "Занимайтесь когда удобно — утром, в обед или поздно ночью." },
+                    { icon: "MapPin", title: "Без спортзала", desc: "Тренируйтесь дома, в парке или в командировке — нужен только телефон." },
+                    { icon: "Shield", title: "Гарантия результата", desc: "Если за 30 дней нет прогресса — вернём деньги без лишних вопросов." },
+                    { icon: "HeartHandshake", title: "Живая поддержка", desc: "Реальный тренер на связи, не бот. Всегда поможет и подбодрит." },
                   ].map((item) => (
-                    <div
-                      key={item.title}
-                      className="flex items-start gap-4 p-5 rounded-2xl bg-white/5 ring-1 ring-white/10 hover:bg-white/10 transition-colors"
-                    >
-                      <div className="flex-shrink-0 w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center">
-                        <Icon name={item.icon} size={20} />
+                    <div key={item.title} className="flex items-start gap-4">
+                      <div className="w-10 h-10 rounded-xl bg-[#E8FF47]/10 ring-1 ring-[#E8FF47]/20 flex items-center justify-center flex-shrink-0">
+                        <Icon name={item.icon} size={20} className="text-[#E8FF47]" />
                       </div>
                       <div>
                         <div className="font-semibold mb-1">{item.title}</div>
@@ -246,283 +395,45 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Journey Section */}
-      <section className="relative z-10 py-24 px-6">
+      {/* ─── FOOTER ─── */}
+      <footer className="relative z-10 py-16 px-6 border-t border-white/10">
         <div className="max-w-7xl mx-auto">
-          <div className="rounded-3xl bg-white/5 ring-1 ring-white/10 backdrop-blur p-12">
-            {/* Section Header */}
-            <div className="text-center mb-16">
-              <h2 className="text-5xl md:text-6xl font-bold tracking-tight mb-6 text-balance">Ваш путь к результату</h2>
-              <p className="text-xl text-white/80 max-w-3xl mx-auto text-pretty">
-                Четыре простых шага — и вы уже тренируетесь с профессионалами.
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+            <div className="md:col-span-2">
+              <div className="flex items-center gap-2 mb-4">
+                <Icon name="Dumbbell" size={20} />
+                <span className="font-bold text-xl">Мой Спортзал</span>
+              </div>
+              <p className="text-white/50 leading-relaxed max-w-sm">
+                Онлайн-платформа для тренировок и общения с тренерами. Достигайте целей — в любом месте, в любое время.
               </p>
             </div>
 
-            {/* Journey Cards */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
-              {/* Phase 1 */}
-              <div className="rounded-2xl bg-white/5 ring-1 ring-white/10 backdrop-blur p-8 h-80 flex flex-col">
-                <div className="flex-1">
-                  <div className="text-3xl font-bold text-white/60 mb-4">01.</div>
-                  <h3 className="text-xl font-semibold mb-4">Регистрация</h3>
-                  <p className="text-white/80 leading-relaxed text-sm">
-                    Создайте аккаунт за 2 минуты и заполните анкету о своих целях, уровне подготовки и расписании.
-                  </p>
-                </div>
-              </div>
-
-              {/* Phase 2 */}
-              <div className="rounded-2xl bg-white/5 ring-1 ring-white/10 backdrop-blur p-8 h-80 flex flex-col">
-                <div className="flex-1">
-                  <div className="text-3xl font-bold text-white/60 mb-4">02.</div>
-                  <h3 className="text-xl font-semibold mb-4">Ваш тренер</h3>
-                  <p className="text-white/80 leading-relaxed text-sm">
-                    Мы подберём персонального тренера под ваши задачи. Познакомьтесь на первой бесплатной консультации.
-                  </p>
-                </div>
-              </div>
-
-              {/* Phase 3 */}
-              <div className="rounded-2xl bg-white/5 ring-1 ring-white/10 backdrop-blur p-8 h-80 flex flex-col">
-                <div className="flex-1">
-                  <div className="text-3xl font-bold text-white/60 mb-4">03.</div>
-                  <h3 className="text-xl font-semibold mb-4">Тренировки</h3>
-                  <p className="text-white/80 leading-relaxed text-sm">
-                    Занимайтесь по индивидуальной программе — дома или в зале, в прямом эфире или в записи.
-                  </p>
-                </div>
-              </div>
-
-              {/* Phase 4 */}
-              <div className="rounded-2xl bg-white/5 ring-1 ring-white/10 backdrop-blur p-8 h-80 flex flex-col">
-                <div className="flex-1">
-                  <div className="text-3xl font-bold text-white/60 mb-4">04.</div>
-                  <h3 className="text-xl font-semibold mb-4">Результат</h3>
-                  <p className="text-white/80 leading-relaxed text-sm">
-                    Фиксируйте прогресс, получайте обратную связь от тренера и делитесь достижениями с сообществом.
-                  </p>
-                </div>
+            <div>
+              <h4 className="font-semibold mb-5 text-white/80">Платформа</h4>
+              <div className="flex flex-col gap-3">
+                {["Тренировки", "Питание", "Тренеры", "Сообщество", "Прогресс"].map((l) => (
+                  <a key={l} href="#" className="text-white/50 hover:text-white transition-colors text-sm">{l}</a>
+                ))}
               </div>
             </div>
 
-            {/* CTA Button */}
-            <div className="text-center">
-              <Button
-                size="lg"
-                className="bg-white text-black hover:bg-white/90 rounded-full px-12 py-4 text-lg font-semibold"
-              >
-                Начать бесплатно
-              </Button>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* FAQ Section */}
-      <section className="relative z-10 py-24 px-6">
-        <div className="max-w-7xl mx-auto">
-          <div className="rounded-3xl bg-white/5 ring-1 ring-white/10 backdrop-blur p-12">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
-              {/* Left Column */}
-              <div>
-                <h2 className="text-5xl md:text-6xl font-bold tracking-tight mb-6 text-balance">
-                  Частые вопросы
-                </h2>
-                <p className="text-xl text-white/80 leading-relaxed text-pretty">
-                  Всё, что нужно знать о платформе: тренировках, программах питания, прогрессе и общении с тренерами.
-                </p>
-              </div>
-
-              {/* Right Column - FAQ Accordion */}
-              <div className="space-y-4">
-                {faqs.map((faq, index) => (
-                  <div
-                    key={index}
-                    className="rounded-2xl bg-white/5 ring-1 ring-white/10 backdrop-blur overflow-hidden"
-                  >
-                    <button
-                      onClick={() => toggleFaq(index)}
-                      className="w-full p-6 text-left flex items-center justify-between hover:bg-white/5 transition-colors"
-                    >
-                      <h3 className="text-lg font-semibold pr-4">{faq.question}</h3>
-                      {openFaq === index ? (
-                        <Minus className="w-5 h-5 flex-shrink-0" />
-                      ) : (
-                        <Plus className="w-5 h-5 flex-shrink-0" />
-                      )}
-                    </button>
-                    {openFaq === index && (
-                      <div className="px-6 pb-6">
-                        <p className="text-white/80 leading-relaxed">{faq.answer}</p>
-                      </div>
-                    )}
-                  </div>
+            <div>
+              <h4 className="font-semibold mb-5 text-white/80">Компания</h4>
+              <div className="flex flex-col gap-3">
+                {["О нас", "Блог", "Карьера", "Поддержка", "Контакты"].map((l) => (
+                  <a key={l} href="#" className="text-white/50 hover:text-white transition-colors text-sm">{l}</a>
                 ))}
               </div>
             </div>
           </div>
-        </div>
-      </section>
 
-      {/* Contact Section */}
-      <section id="contact" className="relative z-10 py-24 px-6">
-        <div className="max-w-7xl mx-auto">
-          <div className="rounded-3xl bg-black/20 ring-1 ring-white/15 backdrop-blur p-12">
-            {/* Section Header */}
-            <div className="text-center mb-16">
-              <h2 className="text-5xl md:text-6xl font-bold tracking-tight mb-6 text-balance">Запишитесь на консультацию</h2>
-            </div>
-
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
-              {/* Left Column - Contact Form */}
-              <div className="rounded-2xl bg-white/95 text-black p-8 shadow-2xl">
-                <h3 className="text-2xl font-bold mb-6">Бесплатная консультация</h3>
-                <form className="space-y-6">
-                  <div>
-                    <label htmlFor="name" className="block text-sm font-medium mb-2">
-                      Имя
-                    </label>
-                    <input
-                      type="text"
-                      id="name"
-                      className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                      placeholder="Ваше имя"
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="email" className="block text-sm font-medium mb-2">
-                      Email
-                    </label>
-                    <input
-                      type="email"
-                      id="email"
-                      className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                      placeholder="your.email@example.com"
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="message" className="block text-sm font-medium mb-2">
-                      Ваша цель
-                    </label>
-                    <textarea
-                      id="message"
-                      rows={5}
-                      className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
-                      placeholder="Расскажите о своей цели: похудеть, набрать массу, стать выносливее..."
-                    />
-                  </div>
-                  <Button className="w-full bg-black text-white hover:bg-gray-800 rounded-lg py-3 font-normal text-base">
-                    Записаться бесплатно
-                  </Button>
-                </form>
-              </div>
-
-              {/* Right Column - Contact Info */}
-              <div className="space-y-8">
-                <div>
-                  <p className="text-xl text-white/90 leading-relaxed text-pretty">
-                    Хотите узнать, подойдёт ли платформа именно вам? Напишите нам — ответим в течение часа и подберём тренера под ваши задачи.
-                  </p>
-                </div>
-
-                {/* Profile Card */}
-                <div className="rounded-2xl bg-white/95 text-black p-6 shadow-2xl">
-                  <div className="flex items-center gap-4 mb-4">
-                    <img
-                      src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=150&h=150&fit=crop&crop=face"
-                      alt="Алексей Фитнес-тренер"
-                      className="w-16 h-16 rounded-full object-cover"
-                    />
-                    <div>
-                      <h4 className="text-lg font-semibold">Алексей Соколов</h4>
-                      <p className="text-gray-600">Главный тренер платформы</p>
-                    </div>
-                  </div>
-                  <Button className="w-full bg-black text-white hover:bg-gray-800 rounded-lg flex items-center justify-center gap-2">
-                    <Mail className="w-4 h-4" />
-                    Написать тренеру
-                  </Button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Footer */}
-      <footer className="relative z-10 py-24 px-6">
-        <div className="max-w-7xl mx-auto">
-          <div className="rounded-3xl bg-white/[0.03] backdrop-blur-2xl ring-1 ring-white/10 p-12">
-            {/* Main Footer Content */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 mb-12">
-              {/* Brand Section */}
-              <div className="lg:col-span-2">
-                <div className="flex items-center gap-2 mb-6">
-                  <Dumbbell className="w-6 h-6" />
-                  <span className="text-xl font-semibold">Onyx</span>
-                </div>
-                <p className="text-white/80 leading-relaxed text-pretty">
-                  Онлайн-платформа для тренировок с профессиональными тренерами. Индивидуальные программы, питание, прогресс и сообщество — всё для вашего результата.
-                </p>
-              </div>
-
-              {/* Platform Links */}
-              <div>
-                <h4 className="text-sm font-semibold uppercase tracking-wider text-white/60 mb-4">Платформа</h4>
-                <ul className="space-y-3">
-                  {["Тренировки", "Программы питания", "Тренеры", "Прогресс", "Сообщество"].map((link) => (
-                    <li key={link}>
-                      <a href="#" className="text-white/80 hover:text-white transition-colors">
-                        {link}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              {/* Company Links */}
-              <div>
-                <h4 className="text-sm font-semibold uppercase tracking-wider text-white/60 mb-4">Компания</h4>
-                <ul className="space-y-3">
-                  {["О нас", "Блог", "Пресса", "Партнёрам", "Контакты"].map((link) => (
-                    <li key={link}>
-                      <a href="#" className="text-white/80 hover:text-white transition-colors">
-                        {link}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              {/* Newsletter */}
-              <div>
-                <h4 className="text-sm font-semibold uppercase tracking-wider text-white/60 mb-4">Рассылка</h4>
-                <p className="text-white/80 text-sm mb-4 leading-relaxed">
-                  Советы по тренировкам и питанию — раз в неделю.
-                </p>
-                <div className="flex gap-2">
-                  <input
-                    type="email"
-                    placeholder="Email"
-                    className="flex-1 px-3 py-2 bg-white/10 ring-1 ring-white/20 rounded-lg text-sm placeholder:text-white/50 focus:outline-none focus:ring-white/40"
-                  />
-                  <button className="px-3 py-2 bg-white text-black rounded-lg hover:bg-white/90 transition-colors">
-                    <Icon name="ArrowRight" size={16} />
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            {/* Footer Bottom */}
-            <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4">
-              <p className="text-white/60 text-sm">© 2024 Onyx. Все права защищены.</p>
-              <div className="flex items-center gap-6">
-                {["Политика конфиденциальности", "Условия использования"].map((link) => (
-                  <a key={link} href="#" className="text-white/60 hover:text-white text-sm transition-colors">
-                    {link}
-                  </a>
-                ))}
-              </div>
+          <div className="flex flex-col md:flex-row items-center justify-between gap-4 pt-8 border-t border-white/10">
+            <p className="text-white/40 text-sm">© 2024 Мой Спортзал. Все права защищены.</p>
+            <div className="flex gap-6">
+              {["Конфиденциальность", "Оферта", "Cookies"].map((l) => (
+                <a key={l} href="#" className="text-white/40 hover:text-white/70 transition-colors text-sm">{l}</a>
+              ))}
             </div>
           </div>
         </div>
